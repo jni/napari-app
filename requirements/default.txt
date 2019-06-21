@@ -3,4 +3,4 @@ numpy>=1.10.0
 qtpy>=1.7.0
 scipy>=1.2.0
 scikit-image>=0.15.0
-napari>=0.0.9
+napari>=0.0.8

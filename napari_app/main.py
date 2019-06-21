@@ -5,7 +5,7 @@ import argparse
 import numpy as np
 from skimage import io
 
-import napari
+import napari.util
 
 
 def main():
@@ -16,11 +16,12 @@ def main():
     parser.add_argument('-m', '--multichannel', help='Treat images as RGB.',
                         action='store_true')
     args = parser.parse_args()
-    with napari.app():
+    with napari.util.app_context():
         images = io.ImageCollection(args.images, conserve_memory=False)
+        #import ipdb; ipdb.set_trace()
         if args.layers:
             napari.view(*images, multichannel=args.multichannel,
-                            hide_menubar=False)
+                        hide_menubar=False)
         else:
             image = np.stack(images, axis=0)
             napari.view(image, multichannel=args.multichannel,
