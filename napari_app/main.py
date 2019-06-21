@@ -18,11 +18,13 @@ def main():
     args = parser.parse_args()
     with napari.util.app_context():
         images = io.ImageCollection(args.images, conserve_memory=False)
-        #import ipdb; ipdb.set_trace()
         if args.layers:
             napari.view(*images, multichannel=args.multichannel,
                         hide_menubar=False)
         else:
-            image = np.stack(images, axis=0)
+            if len(images) == 1:
+                image = images[0]
+            else:
+                image = np.stack(images, axis=0)
             napari.view(image, multichannel=args.multichannel,
                         hide_menubar=False)
